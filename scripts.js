@@ -52,12 +52,12 @@ function checkLength(input, min, max) {
   if (input.value.length < min) {
     showError(
       input,
-      `${getFieldName(input)} debe tener como mínimo ${min} carácteres`,
+      `El ${getFieldName(input)} debe tener como mínimo ${min} carácteres`,
     );
   } else if (input.value.length > max) {
     showError(
       input,
-      `${getFieldName(input)} debe tener como máximo ${max} carácteres`,
+      `El ${getFieldName(input)} debe tener como máximo ${max} carácteres`,
     );
   } else {
     showSuccess(input);
