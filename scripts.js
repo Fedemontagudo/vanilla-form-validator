@@ -4,7 +4,7 @@ const email = document.getElementById('email');
 const password = document.getElementById('password');
 const password2 = document.getElementById('password2');
 
-// Muestra el mensaje de input error
+// Muestra el mensaje de input error y enlaza con css para verificar el input
 function mostrarError(input, message) {
   const formControl = input.parentElement;
   formControl.className = 'form-control error';
@@ -12,13 +12,14 @@ function mostrarError(input, message) {
   small.innerText = message;
 }
 
-// Muestra éxito
+// Muestra el exito y enlaza con el css para verificar el input
+
 function mostrarExito(input) {
   const formControl = input.parentElement;
   formControl.className = 'form-control success';
 }
 
-// Check email is valid
+// Comprueba la validez del email
 function compruebaMail(input) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (re.test(input.value.trim())) {
