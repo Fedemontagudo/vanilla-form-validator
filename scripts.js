@@ -5,7 +5,7 @@ const password = document.getElementById('password');
 const password2 = document.getElementById('password2');
 
 // Muestra el mensaje de input error
-function showError(input, message) {
+function mostrarError(input, message) {
   const formControl = input.parentElement;
   formControl.className = 'form-control error';
   const small = formControl.querySelector('small');
@@ -13,71 +13,72 @@ function showError(input, message) {
 }
 
 // Muestra éxito
-function showSuccess(input) {
+function mostrarExito(input) {
   const formControl = input.parentElement;
   formControl.className = 'form-control success';
 }
 
 // Check email is valid
-function checkEmail(input) {
+function compruebaMail(input) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (re.test(input.value.trim())) {
-    showSuccess(input);
+    mostrarExito(input);
   } else {
-    showError(input, 'Email no valido');
+    mostrarError(input, 'Email no valido');
   }
 }
 // Obtiene el nombre del campo
-function getFieldName(input) {
+function obtenerNombreCampo(input) {
   return input.id.charAt(0).toUpperCase() + input.id.slice(1);
 }
 
 // Chequea campos requeridos
 
-function checkRequired(inputArr) {
+function compruebaRequerido(inputArr) {
   let isRequired = false;
   inputArr.forEach((input) => {
     if (input.value.trim() === '') {
-      showError(input, `${getFieldName(input)} requerido`);
+      mostrarError(input, `${obtenerNombreCampo(input)} requerido`);
       isRequired = true;
     } else {
-      showSuccess(input);
+      mostrarExito(input);
     }
   });
   return isRequired;
 }
 
-// Check input length
-function checkLength(input, min, max) {
+// Chequea la longitud del input
+
+function compruebaLongitud(input, min, max) {
   if (input.value.length < min) {
-    showError(
+    mostrarError(
       input,
-      `El ${getFieldName(input)} debe tener como mínimo ${min} carácteres`,
+      `El ${obtenerNombreCampo(input)} debe tener como mínimo ${min} carácteres`,
     );
   } else if (input.value.length > max) {
-    showError(
+    mostrarError(
       input,
-      `El ${getFieldName(input)} debe tener como máximo ${max} carácteres`,
+      `El ${obtenerNombreCampo(input)} debe tener como máximo ${max} carácteres`,
     );
   } else {
-    showSuccess(input);
+    mostrarExito(input);
   }
 }
 
-// COmprueba si los passwords hacen match
-function checkPasswordsMatch(input1, input2) {
+// Cmprueba si los passwords hacen match
+function compruebaPasswordsMatch(input1, input2) {
   if (input1.value !== input2.value) {
-    showError(input2, 'Los passwords no coinciden');
+    mostrarError(input2, 'Los passwords no coinciden');
   }
 }
 
 // Event listeners
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  if (!checkRequired([username, email, password, password2])) {
-    checkLength(username, 3, 15);
-    checkLength(password, 6, 25);
-    checkEmail(email);
-    checkPasswordsMatch(password, password2);
+  if (!compruebaRequerido([username, email, password, password2])) {
+    compruebaLongitud(username, 3, 15);
+    compruebaLongitud(password, 6, 25);
+    compruebaMail(email);
+    compruebaPasswordsMatch(password, password2);
   }
 });
